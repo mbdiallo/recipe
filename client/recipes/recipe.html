@@ -1,19 +1,25 @@
 <template name="Recipe">
   <article class="recipe {{#if inMenu}} in-menu {{/if}}">
     <h3>{{name}}</h3>
-    <p>
-      {{#each ingredients}}
-        <span class="ingredient">{{name}} - {{amount}}</span>
-      {{/each}}
-    </p>
-    <a href="/recipe/{{_id}}">View Details</a>
 
-    {{#if inMenu}}
-      <button type="button" class="btn-deny toggle-menu" name="add">Remove From Menu</button>
+    {{#if editMode}}
+          {{> quickForm collection="Recipes" id=updateRecipeId type="update" doc=this autosave=true}}
     {{else}}
-      <button type="button" class="btn-primary toggle-menu" name="add">Add To Menu</button>
-    {{/if}}
+        <p>
+          {{#each ingredients}}
+            <span class="ingredient">{{name}} - {{amount}}</span>
+          {{/each}}
+        </p>
 
-    {{> quickForm collection="Recipes" id=updateRecipeId type="update" doc=this autosave=true}}
+        <a href="/recipe/{{_id}}">View Details</a>
+
+        {{#if inMenu}}
+          <button type="button" class="btn-deny toggle-menu" name="add">Remove From Menu</button>
+        {{else}}
+          <button type="button" class="btn-primary toggle-menu" name="add">Add To Menu</button>
+        {{/if}}
+    {{/if}}
+    <i class="fa fa-pencil"></i>
+    <i class="fa fa-trash"></i>
   </article>
 </template>
